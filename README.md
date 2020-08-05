@@ -4,5 +4,8 @@ Running YOLOv5 through web browser using Flask microframework
 1. Torch >= 1.5
 2. Flask
 
-#How to run?
+# How to Run?
 simply run through app.py and View on Local served web browser
+
+# Preview
+
