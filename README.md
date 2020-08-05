@@ -8,5 +8,5 @@ Running YOLOv5 through web browser using Flask microframework
 simply run through app.py and View on Local served web browser
 
 # Preview
-![Preview](https://github.com/tograh/testrepository/master/3DTest.png 99)
+![alt text](https://github.com/muhk01/Yolov5-on-Flask/blob/master/Screenshot%20from%202020-08-05%2005-21-43.png?raw=true)
 
