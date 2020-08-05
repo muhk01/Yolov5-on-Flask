@@ -10,3 +10,7 @@ simply run through app.py and View on Local served web browser
 # Preview
 ![alt text](https://github.com/muhk01/Yolov5-on-Flask/blob/master/Screenshot%20from%202020-08-05%2005-21-43.png?raw=true)
 
+# Resources
+https://github.com/miguelgrinberg/flask-video-streaming
+https://github.com/ultralytics/yolov5
+
