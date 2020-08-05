@@ -6,24 +6,8 @@ import torch.nn as nn
 import torchvision
 import numpy as np
 import argparse
-import paho.mqtt.client as mqtt
-import json
 from utils.datasets import *
 from utils.utils import *
-
-MQTT_TOPIC = "v1/devices/me/telemetry"
-mylist = []
-mycount = []
-broker_url = "demo.thingsboard.io"
-broker_port = 1883
-
-username = "aTbDLqllhSQAyOPeE6rx"
-password = '' 
-
-client = mqtt.Client()
-client.username_pw_set(username)
-client.connect(broker_url, broker_port)
-client.loop_start()
 
 
 class Camera(BaseCamera):
@@ -77,8 +61,6 @@ class Camera(BaseCamera):
 
         # Run inference
         t0 = time.time()
-        classSend = []
-        countSend = []
         img = torch.zeros((1, 3, imgsz, imgsz), device=device)  # init img
         _ = model(img.half() if half else img) if device.type != 'cpu' else None  # run once
         for path, img, im0s, vid_cap in dataset:
@@ -114,22 +96,11 @@ class Camera(BaseCamera):
                     for c in det[:, -1].unique():
                         n = (det[:, -1] == c).sum()  # detections per class
                         s += '%g %s, ' % (n, names[int(c)])  # add to string
-                        listDet = ['person','bicycle','car','motorbike','bus','truck','bird','cat','dog','horse','cow','backpack','umbrella','handbag','kite','cell phone']
                         
-                        if(str(names[int(c)]) in listDet): #filter certain object want to detect
-                            countSend.append('%s' % (names[int(c)]))
-                            classSend.append('%g' % (n))
-
                     for *xyxy, conf, cls in det:
                         label = '%s %.2f' % (names[int(cls)], conf)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
-
-                data_set = {"Object": classSend, "Count": countSend}    #publish to mqtt both object and counts
-                MQTT_MSG = json.dumps(data_set)
-                client.publish(MQTT_TOPIC, MQTT_MSG)
                 print('%sDone. (%.3fs)' % (s, t2 - t1))
-                del classSend[:]
-                del countSend[:]
  
             yield cv2.imencode('.jpg', im0)[1].tobytes()
 
