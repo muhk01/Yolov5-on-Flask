@@ -116,7 +116,7 @@ class Camera(BaseCamera):
                         s += '%g %s, ' % (n, names[int(c)])  # add to string
                         listDet = ['person','bicycle','car','motorbike','bus','truck','bird','cat','dog','horse','cow','backpack','umbrella','handbag','kite','cell phone']
                         
-                        if(str(names[int(c)]) in listDet):
+                        if(str(names[int(c)]) in listDet): #filter certain object want to detect
                             countSend.append('%s' % (names[int(c)]))
                             classSend.append('%g' % (n))
 
@@ -124,7 +124,7 @@ class Camera(BaseCamera):
                         label = '%s %.2f' % (names[int(cls)], conf)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
 
-                data_set = {"Object": classSend, "Count": countSend}
+                data_set = {"Object": classSend, "Count": countSend}    #publish to mqtt both object and counts
                 MQTT_MSG = json.dumps(data_set)
                 client.publish(MQTT_TOPIC, MQTT_MSG)
                 print('%sDone. (%.3fs)' % (s, t2 - t1))
