@@ -17,7 +17,7 @@ mycount = []
 broker_url = "demo.thingsboard.io"
 broker_port = 1883
 
-username = "aTbDLqllhSQAyWLeE6rx"
+username = "aTbDLqllhSQAyOPeE6rx"
 password = '' 
 
 client = mqtt.Client()
