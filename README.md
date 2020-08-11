@@ -8,6 +8,7 @@ Running YOLOv5 through web browser using Flask microframework
 simply run through app.py and View on Local served web browser
 
 # Preview
+Environment setup is using jetson Nano i got around 4-10FPS depending on how many bbox appear in the scene.
 ![alt text](https://github.com/muhk01/Yolov5-on-Flask/blob/master/Screenshot%20from%202020-08-05%2005-21-43.png)
 
 # Resources
