@@ -92,8 +92,9 @@ class Camera(BaseCamera):
                 if det is not None and len(det):
                     # Rescale boxes from img_size to im0 size
                     det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
-
-                    for c in det[:, -1].unique():
+                    
+                    #for c in det[:, -1].unique():  #probably error with torch 1.5
+                    for c in det[:, -1].detach().unique():
                         n = (det[:, -1] == c).sum()  # detections per class
                         s += '%g %s, ' % (n, names[int(c)])  # add to string
                         
